@@ -1,0 +1,167 @@
+ {
+   "openapi": "3.0.0",
+   "info": {
+     "title": "Quality Metadata",
+     "description": "API Documentation Regarding Quality Metadata.\n\nThis API will provide the information to send Quality metadata to our BrewQuest portal.\n\nIt will present the quality KPIs at the table and field level!\n\nSome useful links:\n[BrewQuest Data Management](https://brewdatportal.ab-inbev.com/datamesh-ui/DataAsset)",
+      "version": "1.0.0"
+     },
+     "servers": [
+      {
+        "url": "https://brewdatQM-api-porta/api/v1"
+      }
+     ],
+     "paths": {
+      "/api-docs-tech": {
+        "post": {
+          "summary": "Insert in BrewQuest",
+          "tags": ["Quality Metadata"],
+          "requestBody": {
+            "description": "Quality Metadata",
+            "required": true,
+            "content": 
+            {
+              "application/json": 
+              {
+                "example": 
+                 {
+                    "ObjectType": "table",
+                    "tableName": "gh_customer",
+                    "dlz": "BEES",
+                    "zone": "AFR",
+                    "business_domain": "Customer",
+                    "business_Sub-Domain": "-",
+                    "subregion": "-",
+                    "data_Product": "Sap",
+                    "type_object": {
+                      "object_type": "Table"},
+                    "objects": 
+                      {
+                        "name": "gh_customer",
+                        "tableCalassification": "Cadastral",
+                        "tableType": "External",
+                        "productName": "brewdat_uc_bees_qa",
+                        "schema_Name": "brz_bees_sales_files",
+                        "fitnessIndex_table": {"fitnessIndex": "100%"},
+                        "quality_resume": [
+                                {
+                                "dlz": "BEES",
+                                "zone": "AFR",
+                                "business_domain": "Customer",   
+                                "data_product": "Sap",
+                                "catalog_name":"brewdat_uc_bees_qa",
+                                "datasetName":"customer",  
+                                "schema_name": "brz_bees_sales_files",
+                                "dataset_name":"customer",
+                                "colunm_name":"customer_nm",
+                                "kpi_name": "Accuracy",
+                                "dq_dimension_result": "100%"
+                                }
+                              ]  
+                      }                          
+                  }
+              }
+            }
+          },
+              "responses": 
+                  {
+                    "200": {
+                      "description": "Successful response - Header",
+                      "content": {
+                        "application/json": {
+                          "schema": {
+                            "$ref": "#/components/schemas/HeaderQualityMetadata"
+                          },
+                          "example": {
+                            "message": "Request processed successfully!"
+                          }
+                        }
+                      }
+                    },
+                    "201": {
+                      "description": "Successful response - Body",
+                      "content": {
+                        "application/json": {
+                          "schema": {
+                            "$ref": "#/components/schemas/QualityMetadata"
+                          },
+                          "example": {
+                            "message": "Request processed successfully!"
+                          }
+                        }
+                      }
+                    },
+                    "500": {
+                      "description": "Internal server error",
+                      "content": {
+                        "application/json": {
+                          "example": {
+                            "error": "An internal error has occurred."
+                          }
+                        }
+                      }
+                    },
+                    "400": {
+                      "description": "Invalid value",
+                      "content": {
+                        "application/json": {
+                          "schema": {
+                            "$ref": "#/components/schemas/Validation"
+                          },
+                          "example": {
+                            "message": "Invalid value."
+                          }
+                        }
+                      }
+                    }
+                  }         
+         }
+       } 
+     }, 
+      "components": {
+        "schemas": {
+          "HeaderQualityMetadata": {
+            "type": "object",
+            "properties": {
+              "ObjectType": {"type": "string", "description": "Object Type. Ex: table"},
+              "tableName" : {"type": "string", "description": "Table Name"},
+              "dlz"       : {"type": "string", "description": "DLZ Abbreviation", "enum": ["AFR","ANLT","APC","AUR", "BEES","BRWR", "EUR", "GHQ", "GHQML",  "IL",  "LOLA", " MRTC",  "MAZ", "MAZML",  " MGMT", "MLPLT", "NAZ", "PPLE", "PLTL", " PRTL", "SPLYC", "NCSA"]},
+              "zone"      : {"type": "string", "description": "Abbreviation for Zones","enum": ["AFR", "APC", "EUR", "GHQ", "MAZ", "NAZ", "SAZ"]},
+              "business_domain"    : {"type": "string", "description": "The business domains that are part of the Entity and the Attribute","enum":["Audit", "Common", "Customer", "Finance", "Geo", "Legal", "Logistics", "Marketing", "Order", "People", "Procurement", "Product", "Promotion", "Sales", "Supply", "Technology"]},
+              "business_Sub-Domain": {"type": "string", "description": "The business sub-domains that are part of the DB"},
+              "subregion"          : {"type" : "string", "description": "Subregion that a country may have."},
+              "data_Product"       : {"type": "string", "description": "Origin data source name"}
+            },
+            "required": ["ObjectType", "tableName", "dlz", "zone", "business_domain", "business_Sub-Domain", "subregion", "data_Product"]
+          },
+          "QualityMetadata": {
+            "type": "object",
+            "properties": {
+              "QualityTable": {"type":"string","description":"Table that will present the Quality results"},
+              "object_type": {"$ref": "#/components/schemas/QualityAttributes"}
+              }
+            }, 
+            "QualityAttributes":{
+              "type": "object",
+              "properties": {
+              "catalog_name": {"type": "string", "description": "Catalog name"},
+              "schema_Name" : {"type": "string", "description": "The name of the source schemas that we will receive the information from"},
+              "datasetName" : {"type": "string", "description": "The name of the dataset that we will receive the information from"},
+              "colunmtName" : {"type": "string", "description": "Column name"},
+              "kpi_name"    : {"type": "string","description": "dimension name","enum":["Accuracy", "Integrity", "Validity", "Completeness", "Consistency", "Uniqueness", "Timeliness", "FitnessIndex"]},
+              "dq_dimension_result": { "type": "string","description": "Value between 0 and 100%"}
+            }  
+          },
+          "Validation": {
+            "type": "object",
+            "properties": {
+              "code"    : {"type": "integer","format": "int32"},
+              "type"    : {"type": "string"},
+              "message" : {"type": "string"}
+           }
+          }
+        }  
+      }  
+    }  
+                          
+                      
+                        
