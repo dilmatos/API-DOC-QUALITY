@@ -36,14 +36,12 @@
                       "qualityResume": 
                        [
                           {
-                           "datasetName":"customer",  
                            "colunmName":"customer_nm",
                            "kpiName": "Accuracy",
                            "dqDimensionResult": "100%"
                           }
-                       ],
-                           "fitnessIndex_table": {"fitnessIndex": "100%"}  
-                           
+                       ]
+                          
                       }                          
                   }
               }
