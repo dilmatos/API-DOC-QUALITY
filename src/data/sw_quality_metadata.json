@@ -128,11 +128,9 @@
             "QualityAttributes":{
               "type": "object",
               "properties": {
-              "schemaName" : {"type": "string", "description": "The name of the source schemas that we will receive the information from"},
-              "datasetName" : {"type": "string", "description": "The name of the dataset that we will receive the information from"},
-              "colunmtName" : {"type": "string", "description": "Column name"},
-              "kpiName"    : {"type": "string","description": "dimension name","enum":["Accuracy", "Integrity", "Validity", "Completeness", "Consistency", "Uniqueness", "Timeliness", "FitnessIndex"]},
-              "dqDimensionResult": { "type": "float","description": "Value between 0 and 100%"}
+                "colunmtName" : {"type": "string", "description": "Column name"},
+                "kpiName"    : {"type": "string","description": "dimension name","enum":["Accuracy", "Integrity", "Validity", "Completeness", "Consistency", "Uniqueness", "Timeliness", "FitnessIndex"]},
+                "dqDimensionResult": { "type": "float","description": "Value between 0 and 100%"}
             }  
           },
           "Validation": {
