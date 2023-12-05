@@ -31,7 +31,7 @@
                     "subRegion": "-",
                     "dataProduct": "Sap",
                     "tableName": "gh_customer",
-                    "catalogName": "brewdat_uc_bees_qa",
+                    "dataCatalogName": "brewdat_uc_bees_qa",
                     "schemaName": "brz_bees_sales_files",
                       "qualityResume": 
                        [
@@ -113,7 +113,7 @@
               "subRegion"          : {"type" : "string", "description": "Subregion that a country may have."},
               "dataProduct"       : {"type": "string", "description": "Origin data source name"},
               "tableName" : {"type": "string", "description": "Table Name"},
-              "catalogName" : {"type": "string", "description": "Catalog Name"},
+              "dataCatalogName" : {"type": "string", "description": "Catalog Name"},
               "schemaName": {"type": "string", "description":"Schema Name"}
             },
             "required": ["ObjectType", "tableName", "dlz", "zone", "business_domain", "business_Sub-Domain", "subregion", "data_Product"]
