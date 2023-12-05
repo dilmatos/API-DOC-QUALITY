@@ -7,7 +7,7 @@
      },
      "servers": [
       {
-        "url": "https://brewdatQM-api-porta/api/v1"
+        "url": "https://abi-apim-brewdat-quali-metadata.azure-ai.net"
       }
      ],
      "paths": {
