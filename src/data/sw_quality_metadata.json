@@ -1,6 +1,6 @@
  {
-   "openapi": "3.0.0",
-   "info": {
+     "openapi": "3.0.0",
+     "info": {
      "title": "Quality Metadata",
      "description": "API Documentation Regarding Quality Metadata.\n\nThis API will provide the information to send Quality metadata to our BrewQuest portal.\n\nIt will present the quality KPIs at the table and field level!\n\nSome useful links:\n[BrewQuest Data Management](https://brewdatportal.ab-inbev.com/datamesh-ui/DataAsset)",
       "version": "1.0.0"
@@ -11,7 +11,7 @@
       }
      ],
      "paths": {
-      "/api-docs-tech": {
+      "/api-docs-qual": {
         "post": {
           "summary": "Insert in BrewQuest",
           "tags": ["Quality Metadata"],
@@ -24,39 +24,27 @@
               {
                 "example": 
                  {
-                    "ObjectType": "table",
-                    "tableName": "gh_customer",
                     "dlz": "BEES",
                     "zone": "AFR",
                     "business_domain": "Customer",
                     "business_Sub-Domain": "-",
                     "subregion": "-",
-                    "data_Product": "Sap",
-                    "type_object": {
-                      "object_type": "Table"},
-                    "objects": 
-                      {
-                        "name": "gh_customer",
-                        "tableCalassification": "Cadastral",
-                        "tableType": "External",
-                        "productName": "brewdat_uc_bees_qa",
-                        "schema_Name": "brz_bees_sales_files",
-                        "fitnessIndex_table": {"fitnessIndex": "100%"},
-                        "quality_resume": [
-                                {
-                                "dlz": "BEES",
-                                "zone": "AFR",
-                                "business_domain": "Customer",   
-                                "data_product": "Sap",
-                                "catalog_name":"brewdat_uc_bees_qa",
-                                "datasetName":"customer",  
-                                "schema_name": "brz_bees_sales_files",
-                                "dataset_name":"customer",
-                                "colunm_name":"customer_nm",
-                                "kpi_name": "Accuracy",
-                                "dq_dimension_result": "100%"
-                                }
-                              ]  
+                    "dataProduct": "Sap",
+                    "tableName": "gh_customer",
+                    "catalogName": "brewdat_uc_bees_qa",
+                    "schemaName": "brz_bees_sales_files",
+                      "qualityResume": 
+                       [
+                          {
+                           "datasetName":"customer",  
+                           "schemaName": "brz_bees_sales_files",
+                           "colunmName":"customer_nm",
+                           "kpiName": "Accuracy",
+                           "dqDimensionResult": "100%"
+                          }
+                       ],
+                           "fitnessIndex_table": {"fitnessIndex": "100%"}  
+                           
                       }                          
                   }
               }
@@ -115,21 +103,21 @@
                     }
                   }         
          }
-       } 
-     }, 
+       } ,
       "components": {
         "schemas": {
           "HeaderQualityMetadata": {
             "type": "object",
             "properties": {
-              "ObjectType": {"type": "string", "description": "Object Type. Ex: table"},
-              "tableName" : {"type": "string", "description": "Table Name"},
               "dlz"       : {"type": "string", "description": "DLZ Abbreviation", "enum": ["AFR","ANLT","APC","AUR", "BEES","BRWR", "EUR", "GHQ", "GHQML",  "IL",  "LOLA", " MRTC",  "MAZ", "MAZML",  " MGMT", "MLPLT", "NAZ", "PPLE", "PLTL", " PRTL", "SPLYC", "NCSA"]},
               "zone"      : {"type": "string", "description": "Abbreviation for Zones","enum": ["AFR", "APC", "EUR", "GHQ", "MAZ", "NAZ", "SAZ"]},
               "business_domain"    : {"type": "string", "description": "The business domains that are part of the Entity and the Attribute","enum":["Audit", "Common", "Customer", "Finance", "Geo", "Legal", "Logistics", "Marketing", "Order", "People", "Procurement", "Product", "Promotion", "Sales", "Supply", "Technology"]},
               "business_Sub-Domain": {"type": "string", "description": "The business sub-domains that are part of the DB"},
               "subregion"          : {"type" : "string", "description": "Subregion that a country may have."},
-              "data_Product"       : {"type": "string", "description": "Origin data source name"}
+              "dataProduct"       : {"type": "string", "description": "Origin data source name"},
+              "tableName" : {"type": "string", "description": "Table Name"},
+              "catalogName" : {"type": "string", "description": "Catalog Name"},
+              "schemaName": {"type": "string", "description":"Schema Name"}
             },
             "required": ["ObjectType", "tableName", "dlz", "zone", "business_domain", "business_Sub-Domain", "subregion", "data_Product"]
           },
@@ -143,12 +131,11 @@
             "QualityAttributes":{
               "type": "object",
               "properties": {
-              "catalog_name": {"type": "string", "description": "Catalog name"},
-              "schema_Name" : {"type": "string", "description": "The name of the source schemas that we will receive the information from"},
+              "schemaName" : {"type": "string", "description": "The name of the source schemas that we will receive the information from"},
               "datasetName" : {"type": "string", "description": "The name of the dataset that we will receive the information from"},
               "colunmtName" : {"type": "string", "description": "Column name"},
-              "kpi_name"    : {"type": "string","description": "dimension name","enum":["Accuracy", "Integrity", "Validity", "Completeness", "Consistency", "Uniqueness", "Timeliness", "FitnessIndex"]},
-              "dq_dimension_result": { "type": "string","description": "Value between 0 and 100%"}
+              "kpiName"    : {"type": "string","description": "dimension name","enum":["Accuracy", "Integrity", "Validity", "Completeness", "Consistency", "Uniqueness", "Timeliness", "FitnessIndex"]},
+              "dqDimensionResult": { "type": "float","description": "Value between 0 and 100%"}
             }  
           },
           "Validation": {
