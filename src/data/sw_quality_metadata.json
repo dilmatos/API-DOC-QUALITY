@@ -37,7 +37,6 @@
                        [
                           {
                            "datasetName":"customer",  
-                           "schemaName": "brz_bees_sales_files",
                            "colunmName":"customer_nm",
                            "kpiName": "Accuracy",
                            "dqDimensionResult": "100%"
