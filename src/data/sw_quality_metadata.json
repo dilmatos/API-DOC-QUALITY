@@ -26,19 +26,19 @@
                  {
                     "dlz": "BEES",
                     "zone": "AFR",
-                    "business_domain": "Customer",
-                    "business_sub_domain": "-",
-                    "sub_region": "-",
-                    "data_product": "Sap",
-                    "table_name": "gh_customer",
-                    "catalog_name": "brewdat_uc_bees_qa",
-                    "schema_name": "brz_bees_sales_files",
+                    "businessDomain": "Customer",
+                    "businessSubDomain": "-",
+                    "subRegion": "-",
+                    "dataProduct": "Sap",
+                    "tableName": "gh_customer",
+                    "catalogName": "brewdat_uc_bees_qa",
+                    "schemaName": "brz_bees_sales_files",
                       "qualityResume": 
                        [
                           {
-                           "colunm_name":"customer_nm",
-                           "kpi_name": "Accuracy",
-                           "dq_result": "100%"
+                           "colunmName":"customer_nm",
+                           "kpiName": "Accuracy",
+                           "dqResult": "100%"
                           }
                        ]
                           
@@ -108,13 +108,13 @@
             "properties": {
               "dlz"       : {"type": "string", "description": "DLZ Abbreviation", "enum": ["AFR","ANLT","APC","AUR", "BEES","BRWR", "EUR", "GHQ", "GHQML",  "IL",  "LOLA", " MRTC",  "MAZ", "MAZML",  " MGMT", "MLPLT", "NAZ", "PPLE", "PLTL", " PRTL", "SPLYC", "NCSA"]},
               "zone"      : {"type": "string", "description": "Abbreviation for Zones","enum": ["AFR", "APC", "EUR", "GHQ", "MAZ", "NAZ", "SAZ"]},
-              "business_domain"    : {"type": "string", "description": "The business domains that are part of the Entity and the Attribute","enum":["Audit", "Common", "Customer", "Finance", "Geo", "Legal", "Logistics", "Marketing", "Order", "People", "Procurement", "Product", "Promotion", "Sales", "Supply", "Technology"]},
-              "business_sub_domain": {"type": "string", "description": "The business sub-domains that are part of the DB"},
-              "sub_region"          : {"type" : "string", "description": "Subregion that a country may have."},
-              "data_product"       : {"type": "string", "description": "Origin data source name"},
-              "table_name" : {"type": "string", "description": "Table Name"},
-              "catalog_name" : {"type": "string", "description": "Catalog Name"},
-              "schema_name": {"type": "string", "description":"Schema Name"}
+              "businessDomain"    : {"type": "string", "description": "The business domains that are part of the Entity and the Attribute","enum":["Audit", "Common", "Customer", "Finance", "Geo", "Legal", "Logistics", "Marketing", "Order", "People", "Procurement", "Product", "Promotion", "Sales", "Supply", "Technology"]},
+              "businessSubDomain": {"type": "string", "description": "The business sub-domains that are part of the DB"},
+              "subRegion"          : {"type" : "string", "description": "Subregion that a country may have."},
+              "dataProduct"       : {"type": "string", "description": "Origin data source name"},
+              "tableName" : {"type": "string", "description": "Table Name"},
+              "catalogName" : {"type": "string", "description": "Catalog Name"},
+              "schemaName": {"type": "string", "description":"Schema Name"}
             },
             "required": ["ObjectType", "tableName", "dlz", "zone", "business_domain", "business_Sub-Domain", "subregion", "data_Product"]
           },
@@ -128,9 +128,9 @@
             "QualityAttributes":{
               "type": "object",
               "properties": {
-                "colunm_name" : {"type": "string", "description": "Column name"},
-                "kpi_name"    : {"type": "string","description": "dimension name","enum":["Accuracy", "Integrity", "Validity", "Completeness", "Consistency", "Uniqueness", "Timeliness", "FitnessIndex"]},
-                "dq_result"   : { "type": "float","description": "Value between 0 and 100%"}
+                "colunmName" : {"type": "string", "description": "Column name"},
+                "kpiName"    : {"type": "string","description": "dimension name","enum":["Accuracy", "Integrity", "Validity", "Completeness", "Consistency", "Uniqueness", "Timeliness", "FitnessIndex"]},
+                "dqResult"   : { "type": "float","description": "Value between 0 and 100%"}
             }     
           },
           "Validation": {
