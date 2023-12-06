@@ -24,6 +24,7 @@
               {
                 "example": 
                  {
+                 "headerBusinessMetadataStrucutre":{
                     "dlz": "BEES",
                     "zone": "AFR",
                     "businessDomain": "Customer",
@@ -32,18 +33,18 @@
                     "dataProduct": "Sap",
                     "tableName": "gh_customer",
                     "dataCatalogName": "brewdat_uc_bees_qa",
-                    "schemaName": "brz_bees_sales_files",
-                      "qualityResume": 
-                       [
-                          {
-                           "colunmName":"customer_nm",
-                           "kpiName": "Accuracy",
-                           "dqResult": "100%"
-                          }
-                       ]
-                          
-                      }                          
-                  }
+                    "schemaName": "brz_bees_sales_files"
+                 },
+                  "qualityMetadataStructure": { 
+                    "qualityTableName": "gh_customer",
+                     "qualityAttributes":{
+                       "colunmName":"customer_nm",
+                       "kpiName": "Accuracy",
+                       "dqResult": "100%"
+                       }                                                                     
+                    }  
+                  }                     
+                }
               }
             }
           },
