@@ -43,7 +43,7 @@
                                 "expectationName": "Completeness",
                                 "result"     : "92%",
                                 "suiteRunId" : "671c2637-3403-4f38-be6e-dc3d5c24bb20",
-                                "suiteRunTs" : "2023-07-29T02:15:01.503+0000"
+                                "suiteRunTs" : [{"time": "2023-07-29T02:15:01.503", "timezone": "UTC-6"}]
                             }     
                           ]                                                                 
                          }                       
@@ -131,7 +131,7 @@
                         "expectation"    : {"type": "string",   "description": "it can be filled in by quality dimensions or customized by the customer."},
                         "result"         : {"type": "float",    "description": "Value between 0 and 100%"},
                         "suiteRunId"     : {"type": "string",   "description": "Case identifier (in this case, one column or several columns can be entered, applying one or more quality dimensions)"},
-                        "suiteRunTs"     : {"type": "datetime", "description": "date in timestemp format that was run"}
+                        "suiteRunTs"     : {"type": "array","items":{"type": "object", "properties": {"time": {"type": "string", "description": "Time of the run"},"timezone": {"type": "string", "description": "Timezone of the run"}}}}
                     },
                     "required": ["colunmName"]     
                   }
