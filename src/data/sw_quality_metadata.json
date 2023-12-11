@@ -10,141 +10,147 @@
         "url": "https://abi-apim-brewdat-quali-metadata.azure-ai.net"
       }
      ],
-     "paths": {
-      "/api-docs-qual": {
-        "post": {
-          "summary": "Insert in BrewQuest",
-          "tags": ["Quality Metadata"],
-          "requestBody": {
-            "description": "Quality Metadata",
-            "required": true,
-            "content": 
-            {
-              "application/json": 
-              {
-                "example": 
-                 {
-                 "headerBusinessMetadataStrucutre":{
-                    "dlz": "BEES",
-                    "zone": "AFR",
-                    "businessDomain": "Customer",
-                    "businessSubDomain": "-",
-                    "subRegion": "-",
-                    "dataProduct": "Sap",
-                    "tableName": "gh_customer",
-                    "dataCatalogName": "brewdat_uc_bees_qa",
-                    "schemaName": "brz_bees_sales_files"
-                 },
-                  "qualityMetadataStructure": { 
-                    "qualityTableName": "gh_customer",
-                     "qualityAttributes":{
-                       "colunmName":"customer_nm",
-                       "kpiName": "Accuracy",
-                       "dqResult": "100%"
-                       }                                                                     
-                    }  
-                  }                     
+     "paths": 
+     {
+      "/api-docs-qual": 
+      {
+       "post": 
+       {
+                  "summary": "Insert fitness Index in BrewQuest",
+                  "tags": ["Quality Metadata Fitness-Index"],
+                  "requestBody": 
+                  {
+                    "description": "Quality Metadata Fitness-Index",
+                    "required": true,
+                    "content": 
+                      {
+                        "application/json": 
+                        {
+                          "example": 
+                          {
+                          "headerBusinessMetadataStrucutre":
+                            {
+                              "dataCatalogName": "brewdat_uc_bees_qa",
+                              "schemaName": "brz_bees_sales_files",
+                              "tableName": "gh_customer"
+                            },
+                            "qualityResult": [
+                             {
+                                "colunmName":"customer_nm",
+                                "Context"    : "{'extra_null_definitions': [], 'blank_as_null': False}",
+                                "dqDimension": "Completeness",
+                                "expectValue": "92%",
+                                "expectationName": "Completeness",
+                                "result"     : "92%",
+                                "suiteRunId" : "671c2637-3403-4f38-be6e-dc3d5c24bb20",
+                                "suiteRunTs" : "2023-07-29T02:15:01.503+0000"
+                            }     
+                          ]                                                                 
+                         }                       
+                        }
+                      }
+                  }
+         },
+           "responses": 
+           {
+            "200": {
+              "description": "Successful response - Header",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/HeaderQualityMetadata"
+                  },
+                  "example": {
+                    "message": "Request processed successfully!"
+                  }
+                }
+              }
+            },
+            "201": {
+              "description": "Successful response - Body",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/QualityResult"
+                  },
+                  "example": {
+                    "message": "Request processed successfully!"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "error": "An internal error has occurred."
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid value",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Validation"
+                  },
+                  "example": {
+                    "message": "Invalid value."
+                  }
                 }
               }
             }
-          },
-              "responses": 
-                  {
-                    "200": {
-                      "description": "Successful response - Header",
-                      "content": {
-                        "application/json": {
-                          "schema": {
-                            "$ref": "#/components/schemas/HeaderQualityMetadata"
-                          },
-                          "example": {
-                            "message": "Request processed successfully!"
-                          }
-                        }
-                      }
-                    },
-                    "201": {
-                      "description": "Successful response - Body",
-                      "content": {
-                        "application/json": {
-                          "schema": {
-                            "$ref": "#/components/schemas/QualityMetadata"
-                          },
-                          "example": {
-                            "message": "Request processed successfully!"
-                          }
-                        }
-                      }
-                    },
-                    "500": {
-                      "description": "Internal server error",
-                      "content": {
-                        "application/json": {
-                          "example": {
-                            "error": "An internal error has occurred."
-                          }
-                        }
-                      }
-                    },
-                    "400": {
-                      "description": "Invalid value",
-                      "content": {
-                        "application/json": {
-                          "schema": {
-                            "$ref": "#/components/schemas/Validation"
-                          },
-                          "example": {
-                            "message": "Invalid value."
-                          }
-                        }
-                      }
-                    }
-                  }         
-         }
-       } ,
+          }         
+    }            
+   } , 
       "components": {
         "schemas": {
           "HeaderQualityMetadata": {
             "type": "object",
             "properties": {
-              "dlz"       : {"type": "string", "description": "DLZ Abbreviation", "enum": ["AFR","ANLT","APC","AUR", "BEES","BRWR", "EUR", "GHQ", "GHQML",  "IL",  "LOLA", " MRTC",  "MAZ", "MAZML",  " MGMT", "MLPLT", "NAZ", "PPLE", "PLTL", " PRTL", "SPLYC", "NCSA"]},
-              "zone"      : {"type": "string", "description": "Abbreviation for Zones","enum": ["AFR", "APC", "EUR", "GHQ", "MAZ", "NAZ", "SAZ"]},
-              "businessDomain"    : {"type": "string", "description": "The business domains that are part of the Entity and the Attribute","enum":["Audit", "Common", "Customer", "Finance", "Geo", "Legal", "Logistics", "Marketing", "Order", "People", "Procurement", "Product", "Promotion", "Sales", "Supply", "Technology"]},
-              "businessSubDomain": {"type": "string", "description": "The business sub-domains that are part of the DB"},
-              "subRegion"          : {"type" : "string", "description": "Subregion that a country may have."},
-              "dataProduct"       : {"type": "string", "description": "Origin data source name"},
-              "tableName" : {"type": "string", "description": "Table Name"},
               "dataCatalogName" : {"type": "string", "description": "Catalog Name"},
-              "schemaName": {"type": "string", "description":"Schema Name"}
+              "schemaName": {"type": "string", "description":"Schema Name"},
+              "tableName" : {"type": "string", "description": "Table Name"}
             },
-            "required": ["ObjectType", "tableName", "dlz", "zone", "business_domain", "business_Sub-Domain", "subregion", "data_Product"]
-          },
-          "QualityMetadata": {
-            "type": "object",
-            "properties": {
-              "QualityTable": {"type":"string","description":"Table that will present the Quality results"},
-              "object_type": {"$ref": "#/components/schemas/QualityAttributes"}
-              }
-            }, 
-            "QualityAttributes":{
+            "required": ["dataCatalogName", "schemaName", "tableName" ]
+          }, 
+            "QualityResult":{
               "type": "object",
               "properties": {
-                "colunmName" : {"type": "string", "description": "Column name"},
-                "kpiName"    : {"type": "string","description": "dimension name","enum":["Accuracy", "Integrity", "Validity", "Completeness", "Consistency", "Uniqueness", "Timeliness", "FitnessIndex"]},
-                "dqResult"   : { "type": "float","description": "Value between 0 and 100%"}
-            }     
-          },
-          "Validation": {
-            "type": "object",
-            "properties": {
-              "code"    : {"type": "integer","format": "int32"},
-              "type"    : {"type": "string"},
-              "message" : {"type": "string"}
-           }
-          }
+                "attributes": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                      "properties": {
+                        "colunmName"     : {"type": "string",   "description": "Column name"},
+                        "Context"        : {"type": "string",   "description": "Rule applied to the chosen field according to the chosen dimension"},
+                        "dqDimension"    : {"type": "string",   "description": "dimension name","enum":["Accuracy", "Integrity", "Validity", "Completeness", "Consistency", "Uniqueness", "Timeliness", "FitnessIndex"]},
+                        "expectValue"    : {"type": "float",    "description": "Value between 0 and 100%, referring to the analysis generated according to the rule <1 or >=1"},
+                        "expectation"    : {"type": "string",   "description": "it can be filled in by quality dimensions or customized by the customer."},
+                        "result"         : {"type": "float",    "description": "Value between 0 and 100%"},
+                        "suiteRunId"     : {"type": "string",   "description": "Case identifier (in this case, one column or several columns can be entered, applying one or more quality dimensions)"},
+                        "suiteRunTs"     : {"type": "datetime", "description": "date in timestemp format that was run"}
+                    },
+                    "required": ["colunmName"]     
+                  }
+                 }
+               }
+              }  ,
+              "Validation": {
+                "type": "object",
+                "properties": {
+                  "code"    : {"type": "integer","format": "int32"},
+                  "type"    : {"type": "string"},
+                  "message" : {"type": "string"}
+                  }
+                 }
         }  
-      }  
-    }  
+      }
+    } 
+   
+
                           
                       
                         
