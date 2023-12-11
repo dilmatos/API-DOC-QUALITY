@@ -1,0 +1,311 @@
+ {
+     "openapi": "3.0.0",
+     "info": {
+     "title": "Quality Metadata",
+     "description": "API Documentation Regarding Quality Metadata.\n\nThis API will provide the information to send Quality metadata to our BrewQuest portal.\n\nIt will present the quality KPIs at the table and field level!\n\nSome useful links:\n[BrewQuest Data Management](https://brewdatportal.ab-inbev.com/datamesh-ui/DataAsset)",
+      "version": "1.0.0"
+     },
+     "servers": [
+      {
+        "url": "https://abi-apim-brewdat-quali-metadata.azure-ai.net"
+      }
+     ],
+     "paths": {
+      "/api-docs-qual": {
+        "post": {
+            "summary": "Insert in BrewQuest",
+            "tags": ["Quality Metadata"],
+            "requestBody": {
+              "description": "Quality Metadata",
+              "required": true,
+              "content": 
+              {
+                "application/json": 
+                {
+                  "example": 
+                  {
+                  "headerBusinessMetadataStrucutre":{
+                      "dataCatalogName": "brewdat_uc_bees_qa",
+                      "schemaName": "brz_bees_sales_files",
+                      "tableName": "gh_customer"
+                  },
+                      "qualityAttributes":{
+                        "colunmName":"customer_nm",
+                        "kpiName": "Accuracy",
+                        "result": "100%"
+                        }                                                                     
+                      }                                           
+                  }
+                }
+             }
+          },
+              "responses": 
+                  {
+                    "200": {
+                      "description": "Successful response - Header",
+                      "content": {
+                        "application/json": {
+                          "schema": {
+                            "$ref": "#/components/schemas/HeaderQualityMetadata"
+                          },
+                          "example": {
+                            "message": "Request processed successfully!"
+                          }
+                        }
+                      }
+                    },
+                    "201": {
+                      "description": "Successful response - Body",
+                      "content": {
+                        "application/json": {
+                          "schema": {
+                            "$ref": "#/components/schemas/QualityMetadata"
+                          },
+                          "example": {
+                            "message": "Request processed successfully!"
+                          }
+                        }
+                      }
+                    },
+                    "500": {
+                      "description": "Internal server error",
+                      "content": {
+                        "application/json": {
+                          "example": {
+                            "error": "An internal error has occurred."
+                          }
+                        }
+                      }
+                    },
+                    "400": {
+                      "description": "Invalid value",
+                      "content": {
+                        "application/json": {
+                          "schema": {
+                            "$ref": "#/components/schemas/Validation"
+                          },
+                          "example": {
+                            "message": "Invalid value."
+                          }
+                        }
+                      }
+                    }
+                  }         
+                },
+       "/api-docs-get": {
+        "get": {
+              "tags": ["Quality Table"],
+              "summary": "Get Catalog/Schema/Table by name",
+              "operationId": "getTableByName",
+              "parameters": [
+                {
+                  "name": "dataCatalogName",
+                  "in": "query",
+                  "description": "Name of the data catalog",
+                  "required": true,
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "name": "schemaName",
+                  "in": "query",
+                  "description": "Name of the schema",
+                  "required": true,
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                {
+                  "name": "tableName",
+                  "in": "query",
+                  "description": "Name of the table",
+                  "required": true,
+                  "schema": {
+                    "type": "string"
+                  }
+                } 
+              ],
+              "responses": {
+                  "200": {
+                    "description": "Successful response - Header",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/HeaderQualityMetadata"
+                        },
+                        "example": {
+                          "message": "Request processed successfully!"
+                        }
+                      }
+                    }
+                  },
+                  "201": {
+                    "description": "Successful response - Body",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/QualityMetadata"
+                        },
+                        "example": {
+                          "message": "Request processed successfully!"
+                        }
+                      }
+                    }
+                  },
+                  "500": {
+                    "description": "Internal server error",
+                    "content": {
+                      "application/json": {
+                        "example": {
+                          "error": "An internal error has occurred."
+                        }
+                      }
+                    }
+                  },
+                  "400": {
+                    "description": "Invalid value",
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/Validation"
+                        },
+                        "example": {
+                          "message": "Invalid value."
+                        }
+                      }
+                    }
+                  } 
+                } 
+            }      
+          },
+          "/api-docs-dg_fit": {
+            "post": {
+                "summary": "Insert fitness Index in BrewQuest",
+                "tags": ["Quality Metadata Fitness-Index"],
+                "requestBody": {
+                  "description": "Quality Metadata Fitness-Index",
+                  "required": true,
+                  "content": 
+                  {
+                    "application/json": 
+                    {
+                      "example": 
+                      {
+                      "headerBusinessMetadataStrucutre":{
+                          "dataCatalogName": "brewdat_uc_bees_qa",
+                          "schemaName": "brz_bees_sales_files",
+                          "tableName": "gh_customer"
+                      }, 
+                         "qualityResult":{
+                            "colunmName":"customer_nm",
+                            "expectValue": "100%",
+                            "expectation": "Accuracy",
+                            "dqDimension": "Accuracy",
+                            "result"     : "100%",
+                            "Data_Run_ts"   : "11/07/2023",
+                            "Context"    : "key-value"
+                            }                                                                     
+                          }  
+                                            
+                      }
+                    }
+                 }
+              },
+                  "responses": 
+                      {
+                        "200": {
+                          "description": "Successful response - Header",
+                          "content": {
+                            "application/json": {
+                              "schema": {
+                                "$ref": "#/components/schemas/HeaderQualityMetadata"
+                              },
+                              "example": {
+                                "message": "Request processed successfully!"
+                              }
+                            }
+                          }
+                        },
+                        "201": {
+                          "description": "Successful response - Body",
+                          "content": {
+                            "application/json": {
+                              "schema": {
+                                "$ref": "#/components/schemas/QualityMetadata"
+                              },
+                              "example": {
+                                "message": "Request processed successfully!"
+                              }
+                            }
+                          }
+                        },
+                        "500": {
+                          "description": "Internal server error",
+                          "content": {
+                            "application/json": {
+                              "example": {
+                                "error": "An internal error has occurred."
+                              }
+                            }
+                          }
+                        },
+                        "400": {
+                          "description": "Invalid value",
+                          "content": {
+                            "application/json": {
+                              "schema": {
+                                "$ref": "#/components/schemas/Validation"
+                              },
+                              "example": {
+                                "message": "Invalid value."
+                              }
+                            }
+                          }
+                        }
+                      }         
+                    }
+      } , 
+      "components": {
+        "schemas": {
+          "HeaderQualityMetadata": {
+            "type": "object",
+            "properties": {
+              "dataCatalogName" : {"type": "string", "description": "Catalog Name"},
+              "schemaName": {"type": "string", "description":"Schema Name"},
+              "tableName" : {"type": "string", "description": "Table Name"}
+            },
+            "required": ["dataCatalogName", "schemaName", "tableName" ]
+          },
+          "QualityMetadata": {
+            "type": "object",
+            "properties": {
+              "object_type": {"$ref": "#/components/schemas/QualityAttributes"}
+              }
+            }, 
+            "QualityAttributes":{
+              "type": "object",
+              "properties": {
+                "colunmName"     : {"type": "string","description": "Column name"},
+                "expectValue"    : {"type": "float", "description": "Value between 0 and 100%"},
+               "expectation"    : {"type": "string","description": "dimension name","enum":["Accuracy", "Integrity", "Validity", "Completeness", "Consistency", "Uniqueness", "Timeliness", "FitnessIndex"]},
+                "dqDimension"    : {"type": "string","description": "dimension name","enum":["Accuracy", "Integrity", "Validity", "Completeness", "Consistency", "Uniqueness", "Timeliness", "FitnessIndex"]},
+                "result"         : {"type": "float", "description": "Value between 0 and 100%"}
+            },
+            "required": ["colunmName", "kpiName", "dqResult"]     
+          },
+          "Validation": {
+            "type": "object",
+            "properties": {
+              "code"    : {"type": "integer","format": "int32"},
+              "type"    : {"type": "string"},
+              "message" : {"type": "string"}
+           }
+          }
+        }  
+      }
+    } 
+
+                          
+                      
+                        
