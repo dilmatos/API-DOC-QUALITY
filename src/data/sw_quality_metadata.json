@@ -123,13 +123,13 @@
                   "items": {
                     "type": "object",
                       "properties": {
-                        "colunmName"     : {"type": "array","items": {"type": "object", "properties": {"colunmName": {"type": "string", "description": "Column name"}}}},
-                        "Context"        : {"type": "array","items": {"type": "object", "properties": {"Key": {"type": "string", "description": "Key"},"Value": {"type": "string", "description": "Value"}}}},
-                        "dqDimension"    : {"type": "string",   "description": "dimension name","enum":["Accuracy", "Integrity", "Validity", "Completeness", "Consistency", "Uniqueness", "Timeliness", "FitnessIndex"]},
-                        "expectedResult" : {"type": "float",    "description": "Value between 0 and 1, referring to the analysis generated according to the rule <1 or >=1"},
-                        "expectation"    : {"type": "string",   "description": "it can be filled in by quality dimensions or customized by the customer."},
-                        "result"         : {"type": "float",    "description": "Value between 0 and 1"},
-                        "expectationRunTs"     : {"type": "string",   "description": "Time of the run"}
+                        "colunmName"        : {"type": "array","items": {"type": "object", "properties": {"colunmName": {"type": "string", "description": "Column name"}}}},
+                        "Context"           : {"type": "array","items": {"type": "object", "properties": {"Key": {"type": "string", "description": "Key"},"Value": {"type": "string", "description": "Value"}}}},                      
+                        "expectationResult" : {"type": "string",   "description": "it can be filled in by quality dimensions or customized by the customer."},
+                        "dqDimension"       : {"type": "string",   "description": "dimension name","enum":["Accuracy", "Integrity", "Validity", "Completeness", "Consistency", "Uniqueness", "Timeliness", "FitnessIndex"]},
+                        "expectedResult"    : {"type": "float",    "description": "Value between 0 and 1, referring to the analysis generated according to the rule <1 or >=1"},
+                        "result"            : {"type": "float",    "description": "Value between 0 and 1"},
+                        "expectationRunTs"  : {"type": "string",   "description": "Time of the run"}
                     },
                     "required": ["colunmName"]     
                   }
