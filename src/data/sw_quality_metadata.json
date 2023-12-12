@@ -35,15 +35,33 @@
                               "tableName": "gh_invoice"
                             },
                             "qualityResult": [
-                             {
-                              "colunmsName": ["net_revenue_amt", "gross_revenue_amt", "discounts_tot", "excise_tax"],
-                              "context": {"sql_condition": "net_revenue_amt = gross_revenue_amt - discounts_tot - excise_tax"},
-                              "expectationName": "net_revenue_formula",
-                              "dqDimension": "Validity",
-                              "expectedResult": 0.94,
-                              "result": 0.99,   
-                              "expectationRunTs": "2023-07-29T02:15:02.538+0000"
-                            }     
+                              {
+                                "colunms": ["invoice_number"],
+                                "context": {"extra_null_definitions": [], "blank_as_null": false},
+                                "expectationName": "Completeness",
+                                "dqDimension": "Completeness",
+                                "expectedResult": 0.85,
+                                "result": 0.98,   
+                                "expectationRunTs": "2023-07-29T02:15:01.503+0000"
+                              },
+                              {
+                                "colunms": ["invoice_bk"],
+                                "context": null,
+                                "expectationName": "uniqueness",
+                                "dqDimension": "Uniqueness",
+                                "expectedResult": 1.0,
+                                "result": 1.0,   
+                                "expectationRunTs": "2023-07-29T02:15:01.503+0000"
+                              },
+                              {
+                                "colunms": ["net_revenue_amt", "gross_revenue_amt", "discounts_tot", "excise_tax"],
+                                "context": {"sql_condition": "net_revenue_amt = gross_revenue_amt - discounts_tot - excise_tax"},
+                                "expectationName": "net_revenue_formula",
+                                "dqDimension": "Validity",
+                                "expectedResult": 0.94,
+                                "result": 0.99,   
+                                "expectationRunTs": "2023-07-29T02:15:02.538+0000"
+                              }     
                           ]                                                                 
                          }                       
                         }
