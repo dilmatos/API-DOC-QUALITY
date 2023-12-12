@@ -115,7 +115,7 @@
             },
             "required": [ "tableName" ]
           }, 
-            "QualityResult":{
+            "QualityResults":{
               "type": "object",
               "properties": {
                 "attributes": {
