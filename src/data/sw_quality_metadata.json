@@ -39,9 +39,9 @@
                                 "colunmName":"customer_nm",
                                 "Context"    : "{'extra_null_definitions': [], 'blank_as_null': False}",
                                 "dqDimension": "Completeness",
-                                "expectValue": "92%",
+                                "expectResult": "1",
                                 "expectationName": "Completeness",
-                                "result"     : "92%",
+                                "result"     : "1",
                                 "suiteRunId" : "671c2637-3403-4f38-be6e-dc3d5c24bb20",
                                 "suiteRunTs" : [{"time": "2023-07-29T02:15:01.503", "timezone": "UTC-6"}]
                             }     
@@ -125,11 +125,11 @@
                     "type": "object",
                       "properties": {
                         "colunmName"     : {"type": "string",   "description": "Column name"},
-                        "Context"        : {"type": "string",   "description": "Rule applied to the chosen field according to the chosen dimension"},
+                        "Context"        : {"type": "array","items": {"type": "object", "properties": {"Key": {"type": "string", "description": "Key"},"Value": {"type": "string", "description": "Value"}}}},
                         "dqDimension"    : {"type": "string",   "description": "dimension name","enum":["Accuracy", "Integrity", "Validity", "Completeness", "Consistency", "Uniqueness", "Timeliness", "FitnessIndex"]},
-                        "expectValue"    : {"type": "float",    "description": "Value between 0 and 100%, referring to the analysis generated according to the rule <1 or >=1"},
+                        "expectResult"    : {"type": "float",    "description": "Value between 0 and 1, referring to the analysis generated according to the rule <1 or >=1"},
                         "expectation"    : {"type": "string",   "description": "it can be filled in by quality dimensions or customized by the customer."},
-                        "result"         : {"type": "float",    "description": "Value between 0 and 100%"},
+                        "result"         : {"type": "float",    "description": "Value between 0 and 1"},
                         "suiteRunId"     : {"type": "string",   "description": "Case identifier (in this case, one column or several columns can be entered, applying one or more quality dimensions)"},
                         "suiteRunTs"     : {"type": "array","items":{"type": "object", "properties": {"time": {"type": "string", "description": "Time of the run"},"timezone": {"type": "string", "description": "Timezone of the run"}}}}
                     },
