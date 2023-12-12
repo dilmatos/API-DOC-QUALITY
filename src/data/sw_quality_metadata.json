@@ -113,7 +113,7 @@
               "schemaName": {"type": "string", "description":"Schema Name"},
               "tableName" : {"type": "string", "description": "Table Name"}
             },
-            "required": ["", "schemaName", "tableName" ]
+            "required": [ "tableName" ]
           }, 
             "QualityResult":{
               "type": "object",
