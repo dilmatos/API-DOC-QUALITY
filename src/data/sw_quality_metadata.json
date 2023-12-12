@@ -28,7 +28,7 @@
                         {
                           "example": 
                           {
-                          "headerBusinessMetadataStrucutre":
+                          "headerQualityMetadataStrucutre":
                             {
                               "dataCatalogName": "brewdat_uc_bees_qa",
                               "schemaName": "brz_bees_sales_files",
