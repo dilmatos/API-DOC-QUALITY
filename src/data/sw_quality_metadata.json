@@ -32,18 +32,17 @@
                             {
                               "dataCatalogName": "brewdat_uc_bees_qa",
                               "schemaName": "brz_bees_sales_files",
-                              "tableName": "gh_customer"
+                              "tableName": "gh_invoice"
                             },
                             "qualityResult": [
                              {
-                                "colunmName":"customer_nm",
-                                "Context"    : "{'extra_null_definitions': [], 'blank_as_null': False}",
-                                "dqDimension": "Completeness",
-                                "expectedResult": "1",
-                                "expectationName": "Completeness",
-                                "result"     : "1",
-                                "suiteRunId" : "671c2637-3403-4f38-be6e-dc3d5c24bb20",
-                                "suiteRunTs" : "2023-07-29T02:15:01.503+0000"
+                              "colunms": ["net_revenue_amt", "gross_revenue_amt", "discounts_tot", "excise_tax"],
+                              "context": {"sql_condition": "net_revenue_amt = gross_revenue_amt - discounts_tot - excise_tax"},
+                              "expectationName": "net_revenue_formula",
+                              "dqDimension": "Validity",
+                              "expectedResult": 0.94,
+                              "result": 0.99,   
+                              "expectationRunTs": "2023-07-29T02:15:02.538+0000"
                             }     
                           ]                                                                 
                          }                       
@@ -114,7 +113,7 @@
               "schemaName": {"type": "string", "description":"Schema Name"},
               "tableName" : {"type": "string", "description": "Table Name"}
             },
-            "required": ["dataCatalogName", "schemaName", "tableName" ]
+            "required": ["", "schemaName", "tableName" ]
           }, 
             "QualityResult":{
               "type": "object",
@@ -124,10 +123,10 @@
                   "items": {
                     "type": "object",
                       "properties": {
-                        "colunmName"     : {"type": "string",   "description": "Column name"},
+                        "colunmName"     : {"type": "array","items": {"type": "object", "properties": {"colunmName": {"type": "string", "description": "Column name"}}}},
                         "Context"        : {"type": "array","items": {"type": "object", "properties": {"Key": {"type": "string", "description": "Key"},"Value": {"type": "string", "description": "Value"}}}},
                         "dqDimension"    : {"type": "string",   "description": "dimension name","enum":["Accuracy", "Integrity", "Validity", "Completeness", "Consistency", "Uniqueness", "Timeliness", "FitnessIndex"]},
-                        "expectedResult"    : {"type": "float",    "description": "Value between 0 and 1, referring to the analysis generated according to the rule <1 or >=1"},
+                        "expectedResult" : {"type": "float",    "description": "Value between 0 and 1, referring to the analysis generated according to the rule <1 or >=1"},
                         "expectation"    : {"type": "string",   "description": "it can be filled in by quality dimensions or customized by the customer."},
                         "result"         : {"type": "float",    "description": "Value between 0 and 1"},
                         "suiteRunId"     : {"type": "string",   "description": "Case identifier (in this case, one column or several columns can be entered, applying one or more quality dimensions)"},
